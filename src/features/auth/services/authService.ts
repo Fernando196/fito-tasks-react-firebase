@@ -1,5 +1,5 @@
 import app from "../../../config/firebase-config";
-import { createUserWithEmailAndPassword, getAuth, NextOrObserver, onAuthStateChanged, signInWithEmailAndPassword, User } from "firebase/auth";
+import { createUserWithEmailAndPassword, getAuth, NextOrObserver, onAuthStateChanged, signInWithEmailAndPassword, signOut, User } from "firebase/auth";
 
 
 const auth = getAuth(app);
@@ -8,12 +8,14 @@ export const createUser = async ( email: string, password: string ) =>{
     return await createUserWithEmailAndPassword(auth, email, password);
 }
 
-export const login = async ( email: string, password: string ) =>{
+export const loginFirebase = async ( email: string, password: string ) =>{
     return await signInWithEmailAndPassword(auth, email, password);
 }
 
-export const stateChange = async ( callback: NextOrObserver<User> ) => {
-   return await onAuthStateChanged(auth, callback);
+export const logoutFirebase = () => signOut(auth);
+
+export const authStateChange = ( callback: NextOrObserver<User> ) => {
+   return onAuthStateChanged(auth, callback);
 }
 
 
