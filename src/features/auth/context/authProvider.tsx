@@ -5,9 +5,11 @@ import { authStateChange, logoutFirebase } from "../services/authService";
 
 export const AuthProvider = ({ children }: { children: ReactNode }) => {
     const [user,setUser] = useState<User | null>(null);
+    const [isLoading,setIsLoading] = useState<boolean>(true);
     const [isAuthenticated,setIsAuthenticated] = useState<boolean>(false);
 
     useEffect(() =>{
+        setIsLoading(true);
         const unsuscribe = authStateChange((user)=>{
             if(user){
                 setUser(user);
@@ -16,6 +18,8 @@ export const AuthProvider = ({ children }: { children: ReactNode }) => {
                 setUser(null);
                 setIsAuthenticated(false)
             }
+
+            setIsLoading(false);
         });
 
         return () => unsuscribe();
@@ -37,6 +41,7 @@ export const AuthProvider = ({ children }: { children: ReactNode }) => {
                 isAuthenticated,
                 login,
                 logout,
+                isLoading,
                 loading: false 
             }}
         >
