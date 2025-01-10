@@ -47,7 +47,7 @@ export const RegisterComponent = () =>{
 
                 <div className="mt-4 flex flex-col">
                     <label>Email</label>
-                    <input type="text" className="border rounded-lg p-2 mt-3" value={email} onChange={(e)=> setEmail(e.target.value) } />
+                    <input type="email" className="border rounded-lg p-2 mt-3" value={email} onChange={(e)=> setEmail(e.target.value) } />
                 </div>
 
                 <div className="mt-4 flex flex-col">
