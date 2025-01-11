@@ -16,7 +16,9 @@ export const AuthLayout = () =>{
                     { isAuthenticated ? (
                         <Navigate to="/" />
                     ) : (
-                        <LoginComponent />
+                        <div className="w-full h-screen flex justify-center items-center">
+                            <LoginComponent />
+                        </div>
                     )}
                 </>
             )}
