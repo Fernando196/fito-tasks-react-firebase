@@ -12,7 +12,7 @@ const LoginComponent = () =>{
     const [error,setError] = useState<string>('');
     const navigate = useNavigate();
 
-    const { login } = useAuth();
+    const { login, handleChangeGuest } = useAuth();
 
     const handleSubmit = async ( event: React.FormEvent<HTMLFormElement> ) =>{
         setError('');
@@ -34,11 +34,16 @@ const LoginComponent = () =>{
         }
     }
 
+    const handleLoginGuest = async () =>{
+        handleChangeGuest(true);
+        navigate('/');
+    }
+
     return(
         <form className="max-w-sm w-full p-4 bg-white shadow-lg rounded-lg flex flex-col" onSubmit={handleSubmit}>
             <h1 className="text-xl font-bold text-center">Login</h1>
             <div className="mt-4 flex flex-col">
-                <label>Usuario</label>
+                <label>Email</label>
                 <input 
                     type="email" 
                     className="border rounded-lg p-2 mt-3"
@@ -58,6 +63,8 @@ const LoginComponent = () =>{
             </div>
 
             { error && <div className="text-red-500 mt-3">{error}</div> }
+
+            <label className="text-base font-bold text-center mt-4 cursor-pointer" onClick={handleLoginGuest}>Login as Guest?</label>
 
             <button disabled={isSubmiting} type="submit" className="bg-blue-400 text-white rounded-lg p-2 mt-6">Login</button>
 
