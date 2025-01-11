@@ -5,6 +5,7 @@ import { authStateChange, logoutFirebase } from "../services/authService";
 
 export const AuthProvider = ({ children }: { children: ReactNode }) => {
     const [user,setUser] = useState<User | null>(null);
+    const [isGuest,setIsGuest] = useState<boolean>(false);
     const [isLoading,setIsLoading] = useState<boolean>(true);
     const [isAuthenticated,setIsAuthenticated] = useState<boolean>(false);
 
@@ -34,6 +35,11 @@ export const AuthProvider = ({ children }: { children: ReactNode }) => {
         await logoutFirebase();
     }
 
+    const handleChangeGuest = async ( value: boolean )=>{
+        setIsAuthenticated(value);
+        setIsGuest(value);
+    }
+
     return(
         <AuthContext.Provider 
             value={{ 
@@ -42,6 +48,8 @@ export const AuthProvider = ({ children }: { children: ReactNode }) => {
                 login,
                 logout,
                 isLoading,
+                isGuest,
+                handleChangeGuest,
                 loading: false 
             }}
         >
